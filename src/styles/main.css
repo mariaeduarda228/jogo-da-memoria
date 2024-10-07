@@ -46,6 +46,11 @@ h2 {
   border-radius: 10px;
 }
 
+.reset:hover {
+  background-color: #ec38bc;
+  color: #fff6ff;
+}
+
 .reset:focus {
   color: #ec38bc;
   background-color: #201925;
@@ -72,7 +77,7 @@ h2 {
 
   font-size: 3em;
   transform: rotateY(180deg);
-  transition: 0.25s;
+  transition: transform 0.6s ease-in-out;
 }
 
 .item::after {
@@ -87,10 +92,27 @@ h2 {
 }
 
 .item.boxOpen {
+  background-color: #d4edda;
   transform: rotateY(0deg);
 }
 
 .boxOpen::after,
 .boxMatch::after {
   transform: rotateY(180deg);
+}
+
+.gameWon {
+  animation: victory 1.5s infinite alternate;
+}
+
+@keyframes victory {
+  0% {
+    background-color: #7303c0;
+  }
+  50% {
+    background-color: #ec38bc;
+  }
+  100% {
+    background-color: #fff6ff;
+  }
 }

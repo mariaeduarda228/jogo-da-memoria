@@ -20,7 +20,11 @@ const emojis = [
 ];
 let openCards = [];
 
-let shuffleEmojis = emojis.sort(() => (Math.random() > 0.5 ? 2 : -1));
+let shuffleEmojis = emojis
+    .map(a => [Math.random(), a])
+    .sort((a, b) => a[0] - b[0])
+    .map(a => a[1]);
+
 
 
 for (let i = 0; i < emojis.length; i++) {
@@ -32,7 +36,7 @@ for (let i = 0; i < emojis.length; i++) {
 }
 
 function handleClick() {
-    if (openCards.length < 2) {
+    if (openCards.length < 2 && !this.classList.contains("boxOpen")) {
         this.classList.add("boxOpen");
         openCards.push(this);
     }
@@ -40,8 +44,6 @@ function handleClick() {
     if (openCards.length == 2) {
         setTimeout(checkMatch, 500);
     }
-
-    console.log(openCards);
 }
 
 function checkMatch() {
@@ -57,6 +59,7 @@ function checkMatch() {
     openCards = [];
 
     if (document.querySelectorAll(".boxMatch").length === emojis.length) {
-        alert("Você venceu!");
+    document.querySelector(".game").classList.add("gameWon");
+    alert("Você venceu!");
     }
 }
